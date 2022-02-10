@@ -7,7 +7,8 @@ import (
 	"os"
 
 	_ "github.com/mattn/go-sqlite3"
-	"github.com/yholivas/ddrillini-go-api/api"
+	"github.com/yholivas/go-ddrillini/api"
+	"github.com/yholivas/go-ddrillini/web"
 )
 
 var db *sql.DB
@@ -34,15 +35,15 @@ func main() {
 	fmt.Println("DB initialized")
 
 	var packdb *api.Pack
-	pack := api.Pack{Name: "RIP 12"}
+	pack := api.Pack{Name: "RIP12", Banner: "RIP12singles-bn.png"}
 	packdb, err = api.CreatePack(db, pack)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	var song1db, song2db *api.Song
-	song1 := api.Song{Title: "9mm", PackID: packdb.ID}
-	song2 := api.Song{Title: "Earthquake", PackID: packdb.ID}
+	song1 := api.Song{Title: "9mm", PackID: packdb.ID, Banner: "9mm-bn.png"}
+	song2 := api.Song{Title: "Earthquake", PackID: packdb.ID, Banner: "tm26-bn.png"}
 	song1db, err = api.CreateSong(db, song1)
 	if err != nil {
 		log.Fatal(err)
@@ -54,4 +55,6 @@ func main() {
 	fmt.Println(song1db)
 	fmt.Println(song2db)
 	fmt.Println(api.GetPack(db, song1db.ID))
+
+	web.Serve(db)
 }

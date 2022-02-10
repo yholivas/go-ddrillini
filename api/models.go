@@ -1,5 +1,6 @@
 package api
 
+// TODO: add song artist and step artist
 type Song struct {
 	ID     int64
 	Title  string

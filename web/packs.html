@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Packs</title>
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <h1>Packs</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Song Count</th>
+          <th>Banner</th>
+        </tr>
+      </thead>
+    <tbody>
+      {{range .}}
+      <tr>
+        <td>{{.ID}}</td>
+        <td>{{.Name}}</td>
+        <td>{{len .Songs}}</td>
+        <td><img src="/img/{{.Name}}/{{.Banner}}"></td>
+      </tr>
+      {{end}}
+    </tbody>
+    </table>
+  </body>
+</html>
