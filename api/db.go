@@ -17,6 +17,8 @@ func InitDB(db *sql.DB) error {
 	query = `create table if not exists songs(
         id integer primary key autoincrement,
         title text not null,
+        subtitle text,
+        artist text,
         banner text,
         pack_fk integer,
         foreign key(pack_fk) references packs(id)
@@ -27,8 +29,8 @@ func InitDB(db *sql.DB) error {
 }
 
 func CreateSong(db *sql.DB, song Song) (*Song, error) {
-	res, err := db.Exec("insert into songs(title, banner, pack_fk) values (?,?,?)",
-		song.Title, song.Banner, song.PackID)
+	res, err := db.Exec("insert into songs(title, subtitle, artist, banner, pack_fk) values (?,?,?,?,?)",
+		song.Title, song.Subtitle, song.Artist, song.Banner, song.PackID)
 	if err != nil {
 		// handle error later
 		return nil, err
@@ -53,7 +55,8 @@ func GetAllSongs(db *sql.DB) ([]Song, error) {
 	var songs []Song
 	for rows.Next() {
 		var song Song
-		if err := rows.Scan(&song.ID, &song.Title, &song.Banner, &song.PackID); err != nil {
+		if err := rows.
+			Scan(&song.ID, &song.Title, &song.Subtitle, &song.Artist, &song.Banner, &song.PackID); err != nil {
 			// handle error later
 			return nil, err
 		}
@@ -64,7 +67,8 @@ func GetAllSongs(db *sql.DB) ([]Song, error) {
 
 func GetSong(db *sql.DB, id int64) (*Song, error) {
 	var song Song
-	err := db.QueryRow("select * from songs where id = ?", id).Scan(&song.ID, &song.Title, &song.Banner, &song.PackID)
+	err := db.QueryRow("select * from songs where id = ?", id).
+		Scan(&song.ID, &song.Title, &song.Subtitle, &song.Artist, &song.Banner, &song.PackID)
 	if err != nil {
 		return nil, err
 	}
@@ -126,7 +130,8 @@ func getSongsForPack(db *sql.DB, pack *Pack) ([]Song, error) {
 	var songs []Song
 	for rows.Next() {
 		var song Song
-		if err := rows.Scan(&song.ID, &song.Title, &song.Banner, &song.PackID); err != nil {
+		if err := rows.
+			Scan(&song.ID, &song.Title, &song.Subtitle, &song.Artist, &song.Banner, &song.PackID); err != nil {
 			// handle error later
 			return nil, err
 		}

@@ -5,13 +5,16 @@
     <link rel="stylesheet" href="/style.css">
   </head>
   <body>
+    <div class="pack-display">
     <h1>Pack: {{.Name}}</h1>
     <table>
       <thead>
         <tr>
-          <th>#</th>
-          <th>Title</th>
-          <th>Banner</th>
+          <th class="song">#</th>
+          <th class="song">Title</th>
+          <th class="song">Subtitle</th>
+          <th class="song">Artist</th>
+          <th class="song">Banner</th>
         </tr>
       </thead>
     <tbody>
@@ -19,10 +22,13 @@
       <tr>
         <td>{{.ID}}</td>
         <td>{{.Title}}</td>
+        <td>{{.Subtitle}}</td>
+        <td>{{.Artist}}</td>
         <td><img src="/img/{{$.Name}}/{{.Title}}/{{.Banner}}"></td>
       </tr>
       {{end}}
     </tbody>
     </table>
+    </div>
   </body>
 </html>

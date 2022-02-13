@@ -42,8 +42,8 @@ func main() {
 	}
 
 	var song1db, song2db *api.Song
-	song1 := api.Song{Title: "9mm", PackID: packdb.ID, Banner: "9mm-bn.png"}
-	song2 := api.Song{Title: "Earthquake", PackID: packdb.ID, Banner: "tm26-bn.png"}
+	song1 := api.Song{Title: "9mm", Artist: "Foxsky", PackID: packdb.ID, Banner: "9mm-bn.png"}
+	song2 := api.Song{Title: "Earthquake", Artist: "Dropgun", PackID: packdb.ID, Banner: "tm26-bn.png"}
 	song1db, err = api.CreateSong(db, song1)
 	if err != nil {
 		log.Fatal(err)

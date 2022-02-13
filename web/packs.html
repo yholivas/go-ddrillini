@@ -5,19 +5,20 @@
     <link rel="stylesheet" href="/style.css">
   </head>
   <body>
+    <div class="pack-display">
     <h1>Packs</h1>
     <table>
       <thead>
         <tr>
-          <th>#</th>
-          <th>Name</th>
-          <th>Song Count</th>
-          <th>Banner</th>
+          <th class="pack">#</th>
+          <th class="pack">Name</th>
+          <th class="pack">Song Count</th>
+          <th class="pack">Banner</th>
         </tr>
       </thead>
     <tbody>
       {{range .}}
-      <tr>
+      <tr class="pack-row" onclick="window.location='/pack/{{.ID}}'">
         <td>{{.ID}}</td>
         <td>{{.Name}}</td>
         <td>{{len .Songs}}</td>
@@ -26,5 +27,6 @@
       {{end}}
     </tbody>
     </table>
+    </div>
   </body>
 </html>
